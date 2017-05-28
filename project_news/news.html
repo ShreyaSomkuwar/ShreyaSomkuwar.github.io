@@ -1,0 +1,331 @@
+<!doctype html>
+<html >
+	<head>
+		<title>
+			News
+		</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		  <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+		  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+		  <style type="text/css">
+body{background-image:url("green_cup.png");
+	margin-bottom:100px;}
+.navbar-nav li{font-weight: bold;}
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; // remove the gap so it doesn't close
+    
+ }	 
+ .dropdown:hover .dropdown-menu a:hover{
+ 	background-color: #ccf5ff;
+ 	color: #005266;
+ }
+.dropdown:hover .dropdown-menu a{
+	color: white;
+	font-weight: bold;
+}
+
+  .affix {
+      top:0;
+      width: 100%;
+      z-index: 9999 !important;
+  }
+  .navbar {
+      margin-bottom: 0px;
+  }
+
+  .affix ~ .container-fluid {
+     position: relative;
+     top: 50px;
+  }
+  .main_outer{padding:20px}
+  a.single-art{text-decoration: none;color: white}
+
+  .inner{padding: 10px; background-color:#00131a;font-size:110%;color: grey;}
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+
+.max-lines {
+  display: block; /* or inline-block */
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 5.6em;
+  line-height: 1.8em;
+}
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/*.css-typing
+{
+    width: 30em;
+    white-space:nowrap;
+    overflow:hidden;
+    -webkit-animation: type 5s steps(50, end);
+    animation: type 10s steps(40, end);
+}
+
+@keyframes type{
+    from { width: 0; }
+}
+
+@-webkit-keyframes type{
+    from { width: 0; }
+}*/
+
+		  </style>
+		  <script>
+			
+				angular.module('myApp',[]).controller('ArticleCarouselController',function($scope,$http){
+					$scope.num=['a','b','c'];
+					$scope.category={
+						general:{
+							bbc_news:{ source:"bbc-news", logo:"bbc_news_logo.png", cha:"BBC News"},
+							google_news:{ source:"google-news", logo:"Google-news.png", cha:"Google News"},
+							toi:{source:"the-times-of-india", logo:"toi_logo.png", cha:"The Times of India"},
+							hindu:{source:"the-hindu", logo:"hindu-logo.jpg", cha:"The Hindu"}
+						},
+						sports:{
+							bbc_sport:{source:"bbc-sport", logo:"bbc_sport_logo.jpg", cha:"BBC Sport"},
+							espn:{source:"espn", logo:"espn_logo.jpg", cha:"ESPN"},
+							espn_cric:{source:"espn-cric-info", logo:"espn-cric-info.png", cha:"ESPN Cric Info"},
+							fox_sport:{source:"fox-sports", logo:"fox_logo.jpg", cha:"Fox Sports"}
+						},
+						buisness:{
+							cnbc:{source:"cnbc", logo:"cnbc_logo.png", cha:"CNBC"},
+							cnn:{source:"cnn", logo:"cnn_logo.jpeg", cha:"CNN"},
+							wall_street:{source:"the-wall-street-journal", logo:"wsj_logo.jpg", cha:"The Wall Street Journal"}
+						},
+						technology:{
+							hacker_news:{source:"hacker-news", logo:"hacker_news_logo.png", cha:"Hacker News"},
+							tech_crunch:{source:"techcrunch", logo:"techcrunch_logo.jpg", cha:"TechCrunch"},
+							next_web:{source:"the-next-web",logo:"tnw_logo.jpg", cha:"The Next Web"}
+						},
+						music:
+						{
+
+							mtv:{source:"mtv-news",logo:"mtv_logo.jpg", cha:"MTV News"}
+						},
+						science_nature:
+						{
+							nat_geo:{source:"national-geographic", logo:"National-Geographic-Logo.jpg", cha:"National Geographic"}
+						}
+					};
+					$scope.apiKey="e6cbeec13a4941f0a059741e88f856e2";
+					angular.forEach($scope.category,function(value,key){
+						angular.forEach(value,function(value1, key1){
+							var url="https://newsapi.org/v1/articles?source="+value1.source+"&apiKey=e6cbeec13a4941f0a059741e88f856e2";
+							$http.get(url).then(function(response){
+								//value.source="abc";
+								value1.articles=response.data.articles;
+								var index=Math.ceil(value1.articles.length/4.0);
+								value1.sampleArray=new Array(index);
+								for (var i = 0; i<index; i++) {
+									value1.sampleArray[i]=i;
+								}
+
+							})
+						});
+					});
+				});
+							
+		</script>
+	</head>
+	<body data-spy="scroll" data-target=".navbar" data-offset="50" ng-app="myApp" ng-controller="ArticleCarouselController">
+	<div class="container-fluid" style="height:200px">
+	<div class="row">
+		<div class="col-md-4" id="abc" style="background-color:#005266;color:black;width:30%;height:200px;/*border: 10px solid #002933;margin-left:0">
+			<!--<div class="container-fluid pull-left" style="border: 10px solid black;width:30%;height:100%;">
+			</div>-->
+		</div>
+
+		<div class="col-md-8" id="#element" style="background-color:#005266;height:200px;margin-right:0;width:70%" >
+		<!--<ul><li ng-repeat="x in category.general.bbc_news.sampleArray">{{x}}</li></ul>
+		<h4>{{category.music.mtv.articles[0].title}}</h4>-->
+			
+		</div>
+	</div>
+	</div>
+		 <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+		  <div class="container-fluid" style="background-color: black">
+		    <div class="navbar-header">
+		      
+		    </div>
+		    <ul class="nav navbar-nav">
+		      <li class="active"><a href="#">HOME</a></li>
+		      <li class="dropdown" >
+		        <a class="dropdown-toggle" data-toggle="dropdown" href="#general">GENERAL</a>
+		        <ul class="dropdown-menu" style="background-color:#80e5ff;">
+		          <li><a href="#bbc_news">BBC News</a></li>
+		          <li><a href="#google_news">Google News</a></li>
+		          <li><a href="#toi">The Times of India</a></li>
+		          <li><a href="#hindu">The Hindu</a></li>
+		        </ul>
+		      </li>
+		      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#sports">SPORT</a>
+		    	<ul class="dropdown-menu" style="background-color:#80e5ff;">
+		    		<li><a href="#bbc_sport">BBC Sport</a></li>
+		    		<li><a href="#espn">ESPN</a></li>
+		    		<li><a href="#espn_cric">ESPN Cric info</a></li>
+		    		<li><a href="#fox_sport">FoxSports</a></li>
+		    	</ul>  	
+		      </li>
+		      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#buisness">BUISNESS</a>
+		      <ul class="dropdown-menu" style="background-color:#80e5ff;">
+		      	<li><a href="#cnbc">CNBC</a></li>
+		      	<li><a href="#cnn">CNN</a></li>
+		      	<li><a href="#wall_street">The Wall Street Journal</a></li>
+		      </ul>
+		      </li>
+		      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#technology">TECHNOLOGY</a>
+		      	<ul class="dropdown-menu" style="background-color:#80e5ff;">
+		      		<li><a href="#hacker_news">Hacker News</a></li>
+		      		<li><a href="#tech_crunch">TechCrunch</a></li>
+		      		<li><a href="#next_web">The Next Web</a></li>
+		      	</ul>
+		      </li>
+		      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#music">MUSIC</a>
+		      	<ul class="dropdown-menu" style="background-color:#80e5ff;">
+		      		<li><a href="#mtv">MTV News</a></li>
+		      	</ul>
+		      </li>
+		      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#science_nature">SCIENCE & NATURE</a>
+		      	<ul class="dropdown-menu" style="background-color:#80e5ff;">
+		      		<li><a href="#nat_geo">National Geographic</a></li>
+		      	</ul>
+		      </li>
+		    </ul>
+		    <!-- <form class="navbar-form navbar-right">
+			  <div class="input-group">
+			    <input type="text" class="form-control" placeholder="Search">
+			    <div class="input-group-btn">
+			      <button class="btn btn-default" type="submit">
+			        <i class="glyphicon glyphicon-search"></i>
+			      </button>
+			    </div>
+			  </div>
+			</form> -->
+		  </div>
+		</nav>
+		<div class="container-fluid">
+		  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+		    <!-- Indicators -->
+		    <ol class="carousel-indicators">
+		      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		      <li data-target="#myCarousel" data-slide-to="1"></li>
+		      <li data-target="#myCarousel" data-slide-to="2"></li>
+		      <li data-target="#myCarousel" data-slide-to="3"></li>
+		    </ol>
+
+		    <!-- Wrapper for slides -->
+		    <div class="carousel-inner">
+
+		      <div class="item active">
+		        <img src="876.jpg" alt="Los Angeles" style="width:100%;height:500px">
+		        <div class="carousel-caption">
+		          <h3>Los Angeles</h3>
+		          <p>LA is always so much fun!</p>
+		        </div>
+		      </div>
+
+		      <div class="item">
+		        <img src="2.jpg" alt="Chicago" style="width:100%;height:500px">
+		        <div class="carousel-caption">
+		          <h3>Chicago</h3>
+		          <p>Thank you, Chicago!</p>
+		        </div>
+		      </div>
+		    
+		      <div class="item">
+		        <img src="in234.jpg" alt="New York" style="width:100%;height:500px">
+		        <div class="carousel-caption">
+		          <h3>New York</h3>
+		          <p>We love the Big Apple!</p>
+		        </div>
+		      </div>
+
+		      <div class="item">
+		        <img src="ca.jpg" alt="New York" style="width:100%;height:500px">
+		        <div class="carousel-caption">
+		          <h3>New York</h3>
+		          <p>We love the Big Apple!</p>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+<div ng-repeat="(cat, value) in category">
+	<div style="margin-top:130px;"></div>
+		<div class="container" id="{{cat}}"><h1 style="font-size:500%;color: black"><center>{{cat}}.</center></h1></div>
+		<!--<div style="height:50px"></div>-->
+		<div ng-repeat="(key,channel) in value"   id="{{key}}">
+		<div style="margin-top:75px;"><img ng-src="{{channel.logo}}" class="pull-left" style="height: 50px;" >&nbsp<span style="font-size:250%;color:#1a1a1a";>|&nbsp{{channel.cha}}</span></div>
+		<!--<div style="height:1px"></div>-->
+		<div class="container-fluid" style="text-align: center;margin-top:20px;background-color:#000000;border-top:7px double #bfbfbf;border-bottom:7px double #bfbfbf ">
+		  <div class="row">
+		  <div id="art_carousel_{{key}}" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false" >
+
+		    <div class="carousel-inner">
+
+		      <div ng-repeat="x in channel.sampleArray" ng-init="val=((x+1)-(4*x))>=0" ng-class="{'item':true,'active': val}">
+		      <div class="row">
+
+		      <div class="col-lg-3 main_outer" ng-repeat="article in channel.articles| limitTo: 4 : x*4"><a ng-href="{{article.url}}" class="single-art" target="_blank">
+
+					<div class="inner" style="font-weight:bold;text-decoration:underline;font-size:1.3em">{{article.title}}</div>
+
+					<div><img ng-src="{{article.urlToImage}}"  style="max-width: 100%;max-height: 100%" alt="No image Available"></div>
+					<div class="inner" style="text-overflow: ellipsis;">{{article.description | limitTo:60}}<span ng-if="article.description.length>80">...</span></div>
+					<div class="inner"></div>
+					<!--<div class="inner"><div style="width:50%" id="time"></div><div style="width:50%" id="by"></></div></div>--></a>
+				</div>
+
+		      </div>
+		      </div>
+		    </div>
+
+		    <!-- Left and right controls -->
+		    <a class="left carousel-control" ng-href="#art_carousel_{{key}}" data-slide="prev">
+		      <span class="glyphicon glyphicon-chevron-left" style="color: :#00131a"></span>
+		      <span class="sr-only">Previous</span>
+		    </a>
+		    <a class="right carousel-control" ng-href="#art_carousel_{{key}}" data-slide="next">
+		      <span class="glyphicon glyphicon-chevron-right" style="color: :#00131a"></span>
+		      <span class="sr-only">Next</span>
+		    </a>
+		  </div>
+		  </div>
+		</div>
+		</div>
+	</div>
+	</body>
+</html>
