@@ -285,7 +285,7 @@ body{background-image:url("linedpaper.png");
 
 <div ng-repeat="(cat, value) in category">
 	<div style="margin-top:130px;"></div>
-		<div class="container" id="{{cat}}"><h1 style="font-size:500%;color: black"><center>{{cat}}.</center></h1></div>
+		<div class="container" id="{{cat}}"><h1 style="font-size:500%;color: black"><center>{{cat| uppercase | limitTo: 1 }}{{cat|limitTo: cat.length : 1}}.</center></h1></div>
 		<!--<div style="height:50px"></div>-->
 		<div ng-repeat="(key,channel) in value"   id="{{key}}">
 		<div style="margin-top:75px;"><img ng-src="{{channel.logo}}" class="pull-left" style="height: 50px;" >&nbsp<span style="font-size:250%;color:#1a1a1a";>|&nbsp{{channel.cha}}</span></div>
