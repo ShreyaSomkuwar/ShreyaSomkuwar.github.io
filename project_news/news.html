@@ -299,14 +299,14 @@ body{background-image:url("linedpaper.png");
 		      <div ng-repeat="x in channel.sampleArray" ng-init="val=((x+1)-(4*x))>=0" ng-class="{'item':true,'active': val}">
 		      <div class="row">
 
-		      <div class="col-lg-3 main_outer" ng-repeat="article in channel.articles| limitTo: 4 : x*4"><a ng-href="{{article.url}}" class="single-art" target="_blank">
+		      <div class="col-lg-3 main_outer" ng-repeat="article in channel.articles| limitTo: 4 : x*4"><a ng-href="{{article.url}}" class="single-art" target="_blank" ng-init="author=article.author.length>0" >
 
 					<div class="inner" style="font-weight:bold;text-decoration:underline;font-size:1.3em">{{article.title}}</div>
 
 					<div><img ng-src="{{article.urlToImage}}"  style="max-width: 100%;max-height: 100%" alt="No image Available"></div>
 					<div class="inner" style="text-overflow: ellipsis;">{{article.description | limitTo:60}}<span ng-if="article.description.length>80">...</span></div>
-					<div class="inner"></div>
-					<!--<div class="inner"><div style="width:50%" id="time"></div><div style="width:50%" id="by"></></div></div>--></a>
+				
+					<div class="inner" style="font-size:85%" ng-init="time=article.publishedAt.length>0"><div class="row"><div class="col-md-6" ng-if="time"><span class="glyphicon glyphicon-time"></span>&nbsp{{article.publishedAt | date:'MMM d, yyyy'}}<br>{{article.publishedAt | date:'h:m a'}}</div><div class="col-md-6" ng-if="author"><span class="glyphicon glyphicon-pencil" ng-init="au_l=article.author.length>15"></span>&nbsp{{article.author | limitTo:15}}<span ng-if="au_l">....</span></div></div></div></a>
 				</div>
 
 		      </div>
