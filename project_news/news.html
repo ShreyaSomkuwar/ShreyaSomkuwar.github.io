@@ -83,7 +83,12 @@ body{background-image:url("linedpaper.png");
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+.carousel .main img{width:100%;height: 700px}
+.carousel-caption{top: 50%;
+transform: translateY(-50%);
+bottom: initial;}
 
+.carousel-caption h1{font-size:5em;color: #005266;font-weight: bold;letter-spacing:4px;text-shadow: 3px 2px white;}
 /*.css-typing
 {
     width: 30em;
@@ -248,35 +253,39 @@ body{background-image:url("linedpaper.png");
 		    <!-- Wrapper for slides -->
 		    <div class="carousel-inner">
 
-		      <div class="item active">
-		        <img src="876.jpg" alt="Los Angeles" style="width:100%;height:500px">
+		      <div class="item active main">
+		        <img src="image1.jpg" alt="Los Angeles">
 		        <div class="carousel-caption">
-		          <h3>Los Angeles</h3>
-		          <p>LA is always so much fun!</p>
+		          <h1>Top Headings now at your fingertips.</h1>
 		        </div>
 		      </div>
 
-		      <div class="item">
-		        <img src="2.jpg" alt="Chicago" style="width:100%;height:500px">
+		      <div class="item main">
+		        <img src="indexnlk.jpg" alt="Chicago">
 		        <div class="carousel-caption">
-		          <h3>Chicago</h3>
-		          <p>Thank you, Chicago!</p>
+		          <h1>News from the top sources are here.</h1>
 		        </div>
 		      </div>
 		    
-		      <div class="item">
-		        <img src="in234.jpg" alt="New York" style="width:100%;height:500px">
+		      <div class="item main">
+		        <img src="image2.jpg" alt="New York">
 		        <div class="carousel-caption">
-		          <h3>New York</h3>
-		          <p>We love the Big Apple!</p>
+		          <h1>News over a range of categories, to satisfy your needs</h1>
 		        </div>
 		      </div>
 
-		      <div class="item">
-		        <img src="ca.jpg" alt="New York" style="width:100%;height:500px">
+		      <div class="item main">
+		        <img src="image4.jpg" alt="New York">
 		        <div class="carousel-caption">
-		          <h3>New York</h3>
-		          <p>We love the Big Apple!</p>
+		          <h1>Only the latest news, to keep you updated.</h1>
+		        </div>
+		      </div>
+
+		      <div class="item main">
+		        <img src="imagesuo.jpg" alt="New York">
+		        <div class="carousel-caption">
+		          <h1>The list of sources is large,</h1>
+		          <p>BBC News, Google News, The Times of India, The Hindu, BBC Sports, <br>ESPN, ESPN cric info, FoxSports, CNBC, CNN,<br> The Wall Street Journal, Hacker News, TechCrunch, The Next web,<br> MTV News, National Geographic. <br>And more to come :)</p>
 		        </div>
 		      </div>
 		    </div>
@@ -304,9 +313,9 @@ body{background-image:url("linedpaper.png");
 					<div class="inner" style="font-weight:bold;text-decoration:underline;font-size:1.3em">{{article.title}}</div>
 
 					<div><img ng-src="{{article.urlToImage}}"  style="max-width: 100%;max-height: 100%" alt="No image Available"></div>
-					<div class="inner" style="text-overflow: ellipsis;">{{article.description | limitTo:60}}<span ng-if="article.description.length>80">...</span></div>
+					<div class="inner">{{article.description | limitTo:60}}<span ng-if="article.description.length>=60">...</span></div>
 				
-					<div class="inner" style="font-size:85%" ng-init="time=article.publishedAt.length>0"><div class="row"><div class="col-md-6" ng-if="time"><span class="glyphicon glyphicon-time"></span>&nbsp{{article.publishedAt | date:'MMM d, yyyy'}}<br>{{article.publishedAt | date:'h:m a'}}</div><div class="col-md-6" ng-if="author"><span class="glyphicon glyphicon-pencil" ng-init="au_l=article.author.length>15"></span>&nbsp{{article.author | limitTo:15}}<span ng-if="au_l">....</span></div></div></div></a>
+					<div class="inner" style="font-size:85%" ng-init="time=article.publishedAt.length>0"><div class="row"><div class="col-md-6" ng-if="time"><span class="glyphicon glyphicon-time"></span>&nbsp{{article.publishedAt | date:'MMM d, yyyy'}}<br>{{article.publishedAt | date:'h:m a'}}</div><div class="col-md-6 pull-right" ng-if="author"><span class="glyphicon glyphicon-pencil" ng-init="au_l=article.author.length>15"></span>&nbsp{{article.author | limitTo:15}}<span ng-if="au_l">....</span></div></div></div></a>
 				</div>
 
 		      </div>
