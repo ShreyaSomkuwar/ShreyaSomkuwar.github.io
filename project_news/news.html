@@ -296,7 +296,7 @@ bottom: initial;}
 		  </div>
 		</div>
 
-<div ng-repeat="(cat, value) in category">
+<div ng-repeat="(cat, value) in category" ng-cloak>
 	<div style="margin-top:130px;"></div>
 		<div class="container" id="{{cat}}"><h1 style="font-size:500%;color: black"><center>{{cat| uppercase | limitTo: 1 }}{{cat|limitTo: cat.length : 1}}.</center></h1></div>
 		<!--<div style="height:50px"></div>-->
