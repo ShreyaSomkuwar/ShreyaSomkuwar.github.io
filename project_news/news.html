@@ -110,6 +110,8 @@ bottom: initial;}
 		  <script>
 			
 				angular.module('myApp',[]).controller('ArticleCarouselController',function($scope,$http){
+					$("#articles").hide();
+					$("#loader").show();
 					$scope.num=['a','b','c'];
 					$scope.category={
 						general:{
@@ -160,6 +162,8 @@ bottom: initial;}
 							})
 						});
 					});
+					$("#loader").hide();
+					$("#articles").show();
 				});
 							
 		</script>
